@@ -19,7 +19,7 @@ public class IrpfApplicationTests {
     private CalculaImposto calculaImposto;
 
     @Test
-    public void calculaImpostoTest() {
+    public void calculaImpostoCompletaTest() {
         double impostoBase = 0;
         double impostoPagar = 0;
         double desconto = 0;
@@ -30,6 +30,28 @@ public class IrpfApplicationTests {
                 .idade(64)
                 .numeroDependentes(1)
                 .tipoImposto('C')
+                .totalRendimentos(89000)
+                .contribuicaoPrevidencial(5000)
+                .build();
+
+        impostoBase = pessoa.getTotalRendimentos() - pessoa.getContribuicaoPrevidencial();
+        desconto = (impostoBase * Impostos.DEP_2_MENOS_IDADE) / 100;
+        impostoPagar = ((((impostoBase - Impostos.BASE_MIN) * Impostos.EXED_1) / 100) + (((impostoBase - Impostos.BASE_MAX) * Impostos.EXED_2) / 100)) - desconto;
+        Assert.assertEquals(impostoPagar, pessoa.getTotalPagar(), calculaImposto.calculaImposto(pessoa).getTotalPagar());
+    }
+
+    @Test
+    public void calculaImpostoSimplificadaTest() {
+        double impostoBase = 0;
+        double impostoPagar = 0;
+        double desconto = 0;
+
+        Pessoa pessoa = Pessoa.builder()
+                .nome("Mario Specht")
+                .cpf("01409004031")
+                .idade(64)
+                .numeroDependentes(1)
+                .tipoImposto('S')
                 .totalRendimentos(89000)
                 .contribuicaoPrevidencial(5000)
                 .build();
