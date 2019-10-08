@@ -1,5 +1,6 @@
 package br.pucrs.irpf;
 
+import br.pucrs.irpf.config.IrpfApplication;
 import br.pucrs.irpf.model.Pessoa;
 import br.pucrs.irpf.services.CalculaImposto;
 import br.pucrs.irpf.utils.Values;
@@ -16,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 //@SpringBootTest
 //@ComponentScan(basePackages ={"br.pucrs.irpf"})
-//@ContextConfiguration
+@ContextConfiguration(classes = {IrpfApplication.class})
 public class IrpfApplicationTests {
 
     @Autowired
