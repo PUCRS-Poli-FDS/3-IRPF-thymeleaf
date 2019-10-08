@@ -1,36 +1,29 @@
 package br.pucrs.irpf.config.values;
 
-import br.pucrs.irpf.model.Pessoa;
-import br.pucrs.irpf.services.CalculaImposto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-
-@Service
 public class Impostos {
+    public static final double BASE_MIN = 12000;
 
-    @Autowired
-    private CalculaImposto calculaImposto;
+    public static final double BASE_MAX = 24000;
 
-//    @PostConstruct
-//    public void teste() {
-//        Pessoa p = br.pucrs.irpf.model.Pessoa.builder()
-//                .nome("Mario Specht")
-//                .cpf("01409004031")
-//                .idade(64)
-//                .numeroDependentes(1)
-//                .tipoImposto('C')
-//                .totalRendimentos(89000)
-//                .contribuicaoPrevidencial(5000)
-//                .build();
-//
-//        Pessoa p1 = calculaImposto.calculaImposto(p);
-//        System.out.println(
-//                "Imposto a pagar ----> " + p1.getTotalPagar() +
-//                "\nTotal impostos -----> " + p1.getImposto() +
-//                "\nTotal Descontos -----> " + p1.getDesconto() +
-//                "\nNumero Dependentes -----> " + p1.getNumeroDependentes()
-//        );
-//    }
+    public static final double PORCENTAGEM_BASE = 5;
+
+    public static final double IDADE = 65;
+
+    public static final double EXED_1 = 15;
+
+    public static final double EXED_2 = 27.5;
+
+    public static final double DEP_2_MENOS_IDADE = 2;
+
+    public static final double DEP_5_MENOS_IDADE = 3.5;
+
+    public static final double DEP_MAIS_5_MENOS_IDADE = 5;
+
+    public static final double DEP_2_MAIS_IDADE = 3;
+
+    public static final double DEP_5_MAIS_IDADE = 4.5;
+
+    public static final double DEP_MAIS_5_MAIS_IDADE = 6;
 }

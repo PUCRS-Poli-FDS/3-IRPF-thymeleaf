@@ -1,9 +1,9 @@
 package br.pucrs.irpf;
 
 import br.pucrs.irpf.config.IrpfApplication;
+import br.pucrs.irpf.config.values.Impostos;
 import br.pucrs.irpf.model.Pessoa;
 import br.pucrs.irpf.services.CalculaImposto;
-import br.pucrs.irpf.utils.Values;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,8 +35,8 @@ public class IrpfApplicationTests {
                 .build();
 
         impostoBase = pessoa.getTotalRendimentos() - pessoa.getContribuicaoPrevidencial();
-        desconto = (impostoBase * Values.DEP_2_MENOS_IDADE) / 100;
-        impostoPagar = ((((impostoBase - Values.BASE_MIN) * Values.EXED_1) / 100) + (((impostoBase - Values.BASE_MAX) * Values.EXED_2) / 100)) - desconto;
+        desconto = (impostoBase * Impostos.DEP_2_MENOS_IDADE) / 100;
+        impostoPagar = ((((impostoBase - Impostos.BASE_MIN) * Impostos.EXED_1) / 100) + (((impostoBase - Impostos.BASE_MAX) * Impostos.EXED_2) / 100)) - desconto;
         Assert.assertEquals(impostoPagar, pessoa.getTotalPagar(), calculaImposto.calculaImposto(pessoa).getTotalPagar());
     }
 }
