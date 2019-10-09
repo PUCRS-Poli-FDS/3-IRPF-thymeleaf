@@ -11,6 +11,7 @@ Mario Specht
 - Número de dependentes**
 - Contribuição previdenciária oficial***
 - Total de rendimentos***
+
 *Campos obrigatórios para todos os contribuintes
 **Campos obrigatórios para os contribuintes que fazem declaração completa
 ***Campos obrigatórios para permitir o cálculo do imposto (qualquer modalidade)
