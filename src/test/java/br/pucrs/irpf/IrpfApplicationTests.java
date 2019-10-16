@@ -47,18 +47,35 @@ public class IrpfApplicationTests {
         double desconto = 0;
 
         Pessoa pessoa = Pessoa.builder()
-                .nome("Mario Specht")
-                .cpf("01409004031")
-                .idade(64)
-                .numeroDependentes(1)
+                .nome("Fulano teste 2")
+                .cpf("03201029318")
+                .idade(32)
+                .numeroDependentes(2)
                 .tipoImposto('S')
-                .totalRendimentos(89000)
-                .contribuicaoPrevidencial(5000)
+                .totalRendimentos(64200)
+                .contribuicaoPrevidencial(2300)
                 .build();
 
         impostoBase = pessoa.getTotalRendimentos() - pessoa.getContribuicaoPrevidencial();
-        desconto = (impostoBase * Impostos.DEP_2_MENOS_IDADE) / 100;
+        desconto = (impostoBase * Impostos.PORCENTAGEM_BASE) / 100;
         impostoPagar = ((((impostoBase - Impostos.BASE_MIN) * Impostos.EXED_1) / 100) + (((impostoBase - Impostos.BASE_MAX) * Impostos.EXED_2) / 100)) - desconto;
+        Assert.assertEquals(impostoPagar, pessoa.getTotalPagar(), calculaImposto.calculaImposto(pessoa).getTotalPagar());
+    }
+
+    @Test
+    public void calculaImpostoSimplificadaSemImpostoTest() {
+        double impostoPagar = 0;
+
+        Pessoa pessoa = Pessoa.builder()
+                .nome("Pessoa Nova")
+                .cpf("03992991837")
+                .idade(28)
+                .numeroDependentes(0)
+                .tipoImposto('S')
+                .totalRendimentos(15000)
+                .contribuicaoPrevidencial(6000)
+                .build();
+
         Assert.assertEquals(impostoPagar, pessoa.getTotalPagar(), calculaImposto.calculaImposto(pessoa).getTotalPagar());
     }
 }

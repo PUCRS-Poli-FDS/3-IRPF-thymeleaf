@@ -12,7 +12,7 @@ public class CalculaImpostoImpl implements CalculaImposto {
     public Pessoa calculaImposto(@NonNull Pessoa pessoa) {
         pessoa.setImposto(impostoBase(pessoa));
         pessoa.setDesconto(desconto(pessoa));
-        pessoa.setTotalPagar(impostoBase(pessoa) - desconto(pessoa));
+        pessoa.setTotalPagar(pessoa.getImposto() - pessoa.getDesconto());
         return pessoa;
     }
 
