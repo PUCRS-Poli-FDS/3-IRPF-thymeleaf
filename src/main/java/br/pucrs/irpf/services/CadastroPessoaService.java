@@ -9,4 +9,6 @@ public interface CadastroPessoaService {
     boolean addPessoa(Pessoa pessoa);
 
     List<Pessoa> getPessoaList();
+
+    List<Pessoa> calculaImpostoPessoas(List<Pessoa> pessoas);
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>IRPF - Cadastro</title>
+    <title>IRPF - Calcula Imposto</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -29,6 +29,9 @@
                     <th>Nome</th>
                     <th>Idade</th>
                     <th>Tipo Imposto</th>
+                    <th>Desconto</th>
+                    <th>Imposto</th>
+                    <th>Total a pagar</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -38,6 +41,9 @@
                     <td th:text="${pessoa.nome}"></td>
                     <td th:text="${pessoa.idade}"></td>
                     <td th:text="${pessoa.tipoImposto}"></td>
+                    <td th:text="${pessoa.desconto}"></td>
+                    <td th:text="${pessoa.imposto}"></td>
+                    <td th:text="${pessoa.totalPagar}"></td>
 <!--                    <td>-->
 <!--                        <div class="btn-group pull-right">-->
 <!--                            <a class="btn btn-sm btn-primary" th:href="@{/edit/{id}(id=${post.id})}" >Editar</a>-->
@@ -50,7 +56,7 @@
         </div>
     </div>
     <div class="panel-footer">
-        <a class="btn btn-sm btn-success" th:href="@{/pessoa/}" >Adicionar</a>
+        <a class="btn btn-sm btn-success" th:href="@{/calculaImposto/}">Recalcular Calcular</a>
     </div>
 </div>
 </body>
