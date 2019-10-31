@@ -1,7 +1,5 @@
 package br.pucrs.irpf.config.values;
 
-import org.springframework.stereotype.Service;
-
 public class Impostos {
     public static final double BASE_MIN = 12000;
 
