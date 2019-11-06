@@ -4,17 +4,23 @@ import br.pucrs.irpf.config.data.Connection;
 import br.pucrs.irpf.dao.PessoaDao;
 import br.pucrs.irpf.model.Pessoa;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class PessoaDaoImpl implements PessoaDao {
 
     private String insert = "INSERT INTO PESSOA(nome, cpf, idade, num_dependentes, contrinuicao_previdencial, total_rendimentos," +
                                                 "desconto, valor_imposto, total_pagar, tipo_imposto) VALUES(?,?,?,?,?,?,?,?,?,?)";
     private String selectById = "";
     private String selectByName = "";
+    private String selectAll = "SELECT nome, cpf, idade, num_dependentes, contrinuicao_previdencial, total_rendimentos, desconto, valor_imposto, total_pagar FROM PESSOA";
 
     @Autowired
     Connection connection;
@@ -69,6 +75,33 @@ public class PessoaDaoImpl implements PessoaDao {
 
     @Override
     public List<Pessoa> getAll() {
-        return null;
+        List<Pessoa> pessoaList = new ArrayList<>();
+        try {
+            Statement statement = connection.connection().createStatement();
+            ResultSet rs = statement.executeQuery(selectAll);
+
+            while (rs.next()) {
+                pessoaList.add(Pessoa.builder()
+                        .nome(rs.getString(1))
+                        .cpf(rs.getString(2))
+                        .idade(rs.getInt(3))
+                        .numeroDependentes(rs.getInt(4))
+                        .contribuicaoPrevidencial(rs.getDouble(5))
+                        .totalRendimentos(rs.getDouble(6))
+                        .desconto(rs.getDouble(7))
+                        .imposto(rs.getDouble(8))
+                        .totalPagar(rs.getDouble(9))
+                        .build());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.connection().close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return pessoaList;
     }
 }

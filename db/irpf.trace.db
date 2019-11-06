@@ -1,3 +1,9 @@
 2019-10-31 20:48:28 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PESSOA" already exists; SQL statement:
 CREATE TABLE pessoa ( id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR (250) NOT NULL, cpf VARCHAR (250) NOT NULL, idade INT (3) NOT NULL, num_dependentes INT (3) NOT NULL, contrinuicao_previdencial NUMBER (100) NOT NULL, total_rendimentos NUMBER (100) NOT NULL, desconto NUMBER (100) NOT NULL, valor_imposto NUMBER (100) NOT NULL, total_pagar NUMBER (100) NOT NULL, tipo_imposto CHAR (1) NOT NULL, ) [42101-199]
+2019-11-05 21:17:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE PESSOA ( ID INT AUTO_INCREMENT PRIMARY KEY, NOME VARCHAR (250) NOT NULL, CPF VARCHAR (250) NOT NULL, IDADE INT (3) NOT NULL, NUM_DEPENDENTES INT (3) NOT NULL, CONTRINUICAO_PREVIDENCIAL NUMBER (100) NOT NULL, TOTAL_RENDIMENTOS NUMBER (100) NOT NULL, DESCONTO NUMBER (100) NOT NULL, VALOR_IMPOSTO NUMBER (100) NOT NULL, TOTAL_PAGAR NUMBER (100) NOT NULL, TIPO_IMPOSTO CHAR (1) NOT NULL, ) IF[*] NOT EXISTS "; SQL statement:
+CREATE TABLE pessoa ( id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR (250) NOT NULL, cpf VARCHAR (250) NOT NULL, idade INT (3) NOT NULL, num_dependentes INT (3) NOT NULL, contrinuicao_previdencial NUMBER (100) NOT NULL, total_rendimentos NUMBER (100) NOT NULL, desconto NUMBER (100) NOT NULL, valor_imposto NUMBER (100) NOT NULL, total_pagar NUMBER (100) NOT NULL, tipo_imposto CHAR (1) NOT NULL, ) IF NOT EXISTS [42000-199]
+2019-11-05 21:30:37 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "PESSOA[*] SELECT * FROM IMPOSTO"; expected "PREPARE"; SQL statement:
+PESSOA SELECT * FROM IMPOSTO [42001-199]
