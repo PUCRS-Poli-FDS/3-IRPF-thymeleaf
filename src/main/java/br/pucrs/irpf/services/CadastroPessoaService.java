@@ -10,5 +10,7 @@ public interface CadastroPessoaService {
 
     List<Pessoa> getPessoaList();
 
+    Pessoa getPessoaById(Pessoa pessoa);
+
     List<Pessoa> calculaImpostoPessoas(List<Pessoa> pessoas);
 }

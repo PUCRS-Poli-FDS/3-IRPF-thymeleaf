@@ -12,6 +12,7 @@ import org.springframework.lang.Nullable;
 @NoArgsConstructor
 public class Pessoa {
 
+    private int id;
     private String nome;
     private String cpf;
     private int idade;

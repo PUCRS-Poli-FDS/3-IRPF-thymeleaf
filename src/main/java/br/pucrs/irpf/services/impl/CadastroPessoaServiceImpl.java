@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,20 +20,23 @@ public class CadastroPessoaServiceImpl implements CadastroPessoaService {
     @Autowired
     private PessoaDao pessoaDao;
 
-    private List<Pessoa> pessoaList = new ArrayList<>();
-
     public boolean addPessoa(Pessoa pessoa) {
         try {
             pessoaDao.save(pessoa);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return pessoaList.add(pessoa) ? true : false;
+        return false;
     }
 
     public List<Pessoa> getPessoaList() {
         return pessoaDao.getAll().stream()
                 .collect(Collectors.toList());
+    }
+
+    public Pessoa getPessoaById(Pessoa pessoa) {
+        return pessoaDao.getPessoaById(pessoa);
     }
 
     public List<Pessoa> calculaImpostoPessoas(List<Pessoa> pessoas) {

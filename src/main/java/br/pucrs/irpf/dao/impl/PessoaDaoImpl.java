@@ -18,9 +18,11 @@ public class PessoaDaoImpl implements PessoaDao {
 
     private String insert = "INSERT INTO PESSOA(nome, cpf, idade, num_dependentes, contrinuicao_previdencial, total_rendimentos," +
                                                 "desconto, valor_imposto, total_pagar, tipo_imposto) VALUES(?,?,?,?,?,?,?,?,?,?)";
-    private String selectById = "";
+    private String selectById = "SELECT id, nome, cpf, idade, num_dependentes, contrinuicao_previdencial, total_rendimentos, desconto, valor_imposto, total_pagar, tipo_imposto " +
+            "FROM PESSOA " +
+            "WHERE ID = ?";
     private String selectByName = "";
-    private String selectAll = "SELECT nome, cpf, idade, num_dependentes, contrinuicao_previdencial, total_rendimentos, desconto, valor_imposto, total_pagar FROM PESSOA";
+    private String selectAll = "SELECT id, nome, cpf, idade, num_dependentes, contrinuicao_previdencial, total_rendimentos, desconto, valor_imposto, total_pagar, tipo_imposto FROM PESSOA";
 
     @Autowired
     Connection connection;
@@ -52,20 +54,39 @@ public class PessoaDaoImpl implements PessoaDao {
         }
     }
 
-//    nome VARCHAR (250) NOT NULL,
-//    cpf VARCHAR (250) NOT NULL,
-//    idade INT (3) NOT NULL,
-//    num_dependentes INT (3) NOT NULL,
-//    contrinuicao_previdencial NUMBER (100) NOT NULL,
-//    total_rendimentos NUMBER (100) NOT NULL,
-//    desconto NUMBER (100) NOT NULL,
-//    valor_imposto NUMBER (100) NOT NULL,
-//    total_pagar NUMBER (100) NOT NULL,
-//    tipo_imposto CHAR (1) NOT NULL,
-
     @Override
     public Pessoa getPessoaById(Pessoa pessoa) {
-        return null;
+        Pessoa result = null;
+        try {
+            PreparedStatement preparedStatement = connection.connection().prepareStatement(selectById);
+            preparedStatement.setInt(1, pessoa.getId());
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                result = Pessoa.builder()
+                        .id(rs.getInt(1))
+                        .nome(rs.getString(2))
+                        .cpf(rs.getString(3))
+                        .idade(rs.getInt(4))
+                        .numeroDependentes(rs.getInt(5))
+                        .contribuicaoPrevidencial(rs.getDouble(6))
+                        .totalRendimentos(rs.getDouble(7))
+                        .desconto(rs.getDouble(8))
+                        .imposto(rs.getDouble(9))
+                        .totalPagar(rs.getDouble(10))
+                        .tipoImposto(rs.getString(11).charAt(0))
+                        .build();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.connection().close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
     @Override
@@ -82,15 +103,17 @@ public class PessoaDaoImpl implements PessoaDao {
 
             while (rs.next()) {
                 pessoaList.add(Pessoa.builder()
-                        .nome(rs.getString(1))
-                        .cpf(rs.getString(2))
-                        .idade(rs.getInt(3))
-                        .numeroDependentes(rs.getInt(4))
-                        .contribuicaoPrevidencial(rs.getDouble(5))
-                        .totalRendimentos(rs.getDouble(6))
-                        .desconto(rs.getDouble(7))
-                        .imposto(rs.getDouble(8))
-                        .totalPagar(rs.getDouble(9))
+                        .id(rs.getInt(1))
+                        .nome(rs.getString(2))
+                        .cpf(rs.getString(3))
+                        .idade(rs.getInt(4))
+                        .numeroDependentes(rs.getInt(5))
+                        .contribuicaoPrevidencial(rs.getDouble(6))
+                        .totalRendimentos(rs.getDouble(7))
+                        .desconto(rs.getDouble(8))
+                        .imposto(rs.getDouble(9))
+                        .totalPagar(rs.getDouble(10))
+                        .tipoImposto(rs.getString(11).charAt(0))
                         .build());
             }
         } catch (SQLException e) {
