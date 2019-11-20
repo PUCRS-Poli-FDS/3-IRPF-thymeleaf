@@ -2,7 +2,6 @@ package br.pucrs.irpf.controller;
 
 import br.pucrs.irpf.model.Pessoa;
 import br.pucrs.irpf.services.CadastroPessoaService;
-import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +26,6 @@ public class PessoaController {
         if(pessoa.getCpf() != null) {
             cadastroPessoaService.getPessoaById(pessoa);
         }
-        mapModel.put("cpf", "102030");
         mapModel.put("paginaRetorno", "pessoa");
         model.addAllAttributes(mapModel);
         return (String) mapModel.get("paginaRetorno");
